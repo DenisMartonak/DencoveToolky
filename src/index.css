@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --surface-0: #ffffff;
+  --surface-1: #f8f9fa;
+  --surface-2: #f1f3f5;
+  --surface-3: #e9ecef;
+  --border: #dee2e6;
+  --accent: #4263eb;
+  --accent-hover: #3b5bdb;
+  --fg: #1a1a2e;
+  --fg-muted: #495057;
+  --fg-faint: #868e96;
+}
+
+.dark {
+  --surface-0: #0d1117;
+  --surface-1: #161b22;
+  --surface-2: #1c2333;
+  --surface-3: #2d333b;
+  --border: #30363d;
+  --accent: #6d8cff;
+  --accent-hover: #8da4ff;
+  --fg: #e6edf3;
+  --fg-muted: #9ca3af;
+  --fg-faint: #6b7280;
+}
+
+body {
+  background: var(--surface-0);
+  color: var(--fg);
+  transition: background-color 200ms, color 200ms;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--fg-faint);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--fg-muted);
+}
+
+/* Syntax highlighting tokens */
+.token-key { color: #6d8cff; }
+.token-string { color: #7ec699; }
+.token-number { color: #f78c6c; }
+.token-boolean { color: #c792ea; }
+.token-null { color: #ff5370; }
+.token-bracket { color: var(--fg-muted); }
+
+/* Textarea styling */
+textarea {
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+}
+
+/* Focus ring utility */
+.focus-ring:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
