@@ -11,7 +11,7 @@ const inputSchema = z.string().min(1, "Input is empty");
 
 export default function Base64Codec() {
   const [mode, setMode] = useState<Mode>("encode");
-  const [input, setInput] = useLocalStorage("devkit-b64-input", "Hello, DevKit!");
+  const [input, setInput] = useLocalStorage("devkit-b64-input", "Hello, Toolky!");
 
   const result = useMemo(() => {
     const parsed = inputSchema.safeParse(input);

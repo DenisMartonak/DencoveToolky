@@ -1,4 +1,4 @@
-# DevKit — Local Dev Utilities
+# Toolky — Local Dev Utilities
 
 A privacy-first, local-only suite of developer utilities that eliminates the need for ad-heavy, slow, third-party conversion websites.
 

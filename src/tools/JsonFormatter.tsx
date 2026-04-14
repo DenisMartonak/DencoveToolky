@@ -5,7 +5,7 @@ import Panel from "../components/Panel";
 import CopyButton from "../components/CopyButton";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
-const SAMPLE = `{"name":"DevKit","version":1,"features":["json","base64","url","jwt","css"],"config":{"theme":"dark","local":true}}`;
+const SAMPLE = `{"name":"Toolky","version":1,"features":["json","base64","url","jwt","css"],"config":{"theme":"dark","local":true}}`;
 
 function highlightJson(json: string): string {
   return json.replace(
