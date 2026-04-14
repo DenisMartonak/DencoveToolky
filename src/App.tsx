@@ -4,6 +4,8 @@ import Sidebar from "./components/Sidebar";
 import CommandPalette from "./components/CommandPalette";
 import { tools } from "./tools/registry";
 
+const Settings = lazy(() => import("./tools/Settings"));
+
 const toolRoutes = tools.map((t) => ({
   path: t.id,
   Component: lazy(t.component),
@@ -62,6 +64,7 @@ export default function App() {
           <Suspense fallback={<Loader />}>
             <Routes>
               <Route path="/" element={<Navigate to="/json" replace />} />
+              <Route path="/settings" element={<Settings />} />
               {toolRoutes.map((r) => (
                 <Route key={r.path} path={r.path} element={<r.Component />} />
               ))}

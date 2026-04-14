@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { tools } from "../tools/registry";
+import { tools, categories } from "../tools/registry";
 import { useTheme } from "../context/ThemeContext";
 
 interface Props {
@@ -47,38 +47,67 @@ export default function Sidebar({ onOpenPalette, mobileOpen, onCloseMobile }: Pr
 
         {/* Nav */}
         <nav className="flex-1 overflow-y-auto px-3 py-2">
-          <ul className="space-y-0.5">
-            {tools.map((tool) => (
-              <li key={tool.id}>
-                <NavLink
-                  to={`/${tool.id}`}
-                  onClick={onCloseMobile}
-                  className={({ isActive }) =>
-                    `flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${
-                      isActive
-                        ? "bg-accent/10 text-accent font-medium"
-                        : "text-fg-muted hover:bg-surface-2 hover:text-fg"
-                    }`
-                  }
-                >
-                  <span className="w-8 h-8 rounded-md bg-surface-2 border border-border flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
-                    {tool.icon}
-                  </span>
-                  <span className="truncate">{tool.name}</span>
-                </NavLink>
-              </li>
-            ))}
-          </ul>
+          {categories.map((cat) => {
+            const catTools = tools.filter((t) => t.category === cat.id);
+            if (catTools.length === 0) return null;
+            return (
+              <div key={cat.id} className="mb-4">
+                <div className="px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-fg-faint">
+                  {cat.label}
+                </div>
+                <ul className="space-y-0.5">
+                  {catTools.map((tool) => (
+                    <li key={tool.id}>
+                      <NavLink
+                        to={`/${tool.id}`}
+                        onClick={onCloseMobile}
+                        className={({ isActive }) =>
+                          `flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${
+                            isActive
+                              ? "bg-accent/10 text-accent font-medium"
+                              : "text-fg-muted hover:bg-surface-2 hover:text-fg"
+                          }`
+                        }
+                      >
+                        <span className="w-8 h-8 rounded-md bg-surface-2 border border-border flex items-center justify-center text-[10px] font-mono font-bold shrink-0">
+                          {tool.icon}
+                        </span>
+                        <span className="truncate">{tool.name}</span>
+                      </NavLink>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
         </nav>
 
         {/* Footer */}
-        <div className="px-4 py-3 border-t border-border space-y-3">
+        <div className="px-4 py-3 border-t border-border space-y-2">
           <div className="flex items-center gap-2 px-1 py-1 text-[11px] text-fg-faint">
             <svg className="w-3.5 h-3.5 text-green-500 shrink-0" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z" />
             </svg>
             No data leaves your browser
           </div>
+          <NavLink
+            to="/settings"
+            onClick={onCloseMobile}
+            className={({ isActive }) =>
+              `w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg border border-border
+              text-xs font-medium transition-colors focus-ring ${
+                isActive
+                  ? "bg-accent/10 text-accent border-accent/30"
+                  : "text-fg-muted hover:bg-surface-2"
+              }`
+            }
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+            Settings
+          </NavLink>
           <button
             onClick={toggle}
             className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg border border-border
